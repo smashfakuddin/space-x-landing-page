@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import YearData from '.././../Data/Data.json'
+import YearData from '.././../Data/Data.json';
+import StatusData from '../../Data/landingStatusData.json';
 import { Button } from 'react-bootstrap';
 import LaunchCart from './LaunchCart/LaunchCart';
 
@@ -13,8 +14,9 @@ const Home = () => {
             .then(data => setLaunch(data))
     }, []);
 
+// function one
     const [year, setYear] = useState('');
-    const test = year => {
+    const detectYear = year => {
         setYear(year.year);
     }
 
@@ -24,7 +26,33 @@ const Home = () => {
             .then(res => res.json())
             .then(data => setLaunch(data))
     }, [year]);
-    
+
+// function two
+    const [status, setStatus] = useState('');
+    const test = st => {
+        setStatus(st.status);
+    }
+    const url2=`https://api.spacexdata.com/v3/launches?limit=100&launch_success=${status}`
+    useEffect(() => {
+        fetch(url2)
+            .then(res => res.json())
+            .then(data => setLaunch(data))
+    }, [status]);
+
+// function three
+
+    const [anotherStatus, setAnotherStatus] = useState('');
+    const anotherTest = sta => {
+        setAnotherStatus(sta.status);
+    }
+    const url3=`https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=${anotherStatus}`
+    useEffect(() => {
+        fetch(url3)
+            .then(res => res.json())
+            .then(data => setLaunch(data))
+    }, [anotherStatus]);
+
+
     return (
         <div className='home'>
             <h3>Space-X Programs</h3>
@@ -37,7 +65,7 @@ const Home = () => {
                             {
                                 YearData.map(year =>
                                     <div className="col-6 text-center mb-2 pe-3">
-                                        <Button onClick={() => { test(year) }}>{year.year}</Button>
+                                        <Button onClick={() => { detectYear(year) }}>{year.year}</Button>
                                     </div>)
                             }
                         </div>
@@ -45,12 +73,25 @@ const Home = () => {
                     <div>
                         <h5 className='heading'>Successful Launch </h5>
                         <div className="row g-2 year">
-                            <div className="col-6 text-center mb-2 pe-3">
-                                <Button>True</Button>
-                            </div>
-                            <div className="col-6 text-center mb-2 pe-3">
-                                <Button className='bg-gray'>False</Button>
-                            </div>
+                            {
+                                StatusData.map(st =>
+                                    <div className="col-6 text-center mb-2 pe-3">
+                                        <Button onClick={() => { test(st) }}>{st.status}</Button>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <h5 className='heading'>Successful Landing </h5>
+                        <div className="row g-2 year">
+                            {
+                                StatusData.map(sta =>
+                                    <div className="col-6 text-center mb-2 pe-3">
+                                        <Button onClick={() => { anotherTest(sta) }}>{sta.status}</Button>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
