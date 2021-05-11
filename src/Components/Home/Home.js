@@ -11,7 +11,20 @@ const Home = () => {
         fetch('https://api.spacexdata.com/v3/launches?limit=100')
             .then(res => res.json())
             .then(data => setLaunch(data))
-    }, [])
+    }, []);
+
+    const [year, setYear] = useState('');
+    const test = year => {
+        setYear(year.year);
+    }
+
+    const url = `https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=${year}`;
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setLaunch(data))
+    }, [year]);
+    
     return (
         <div className='home'>
             <h3>Space-X Programs</h3>
@@ -24,7 +37,7 @@ const Home = () => {
                             {
                                 YearData.map(year =>
                                     <div className="col-6 text-center mb-2 pe-3">
-                                        <Button>{year.year}</Button>
+                                        <Button onClick={() => { test(year) }}>{year.year}</Button>
                                     </div>)
                             }
                         </div>
@@ -44,7 +57,7 @@ const Home = () => {
                 <div className="col-lg-9">
                     <div className="row">
                         {
-                           launch.map(singleLaunch=> <LaunchCart singleLaunch={singleLaunch}/>)
+                            launch.map(singleLaunch => <LaunchCart singleLaunch={singleLaunch} />)
                         }
                     </div>
 
