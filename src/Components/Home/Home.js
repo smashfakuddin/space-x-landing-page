@@ -56,8 +56,8 @@ const Home = () => {
     return (
         <div className='home'>
             <h3>Space-X Programs</h3>
-            <div className="row">
-                <div className="col-lg-3">
+            <div className="row ">
+                <div className="col-lg-2 mt-5">
                     <h5>Filters</h5>
                     <div>
                         <h5 className='heading'>Launch Year</h5>
@@ -95,8 +95,8 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-9">
-                    <div className="row">
+                <div className="col-lg-10 ">
+                    <div className="row justify-content-md-center mt-5">
                         {
                             launch.map(singleLaunch => <LaunchCart singleLaunch={singleLaunch} />)
                         }
