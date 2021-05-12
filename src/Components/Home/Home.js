@@ -65,7 +65,7 @@ const Home = () => {
                             {
                                 YearData.map(year =>
                                     <div className="col-6 text-center mb-2 pe-3">
-                                        <Button onClick={() => { detectYear(year) }}>{year.year}</Button>
+                                        <button className='customButton' onClick={() => { detectYear(year) }}>{year.year}</button>
                                     </div>)
                             }
                         </div>
@@ -76,7 +76,7 @@ const Home = () => {
                             {
                                 StatusData.map(st =>
                                     <div className="col-6 text-center mb-2 pe-3">
-                                        <Button onClick={() => { test(st) }}>{st.status}</Button>
+                                        <button className='customButton' onClick={() => { test(st) }}>{st.status}</button>
                                     </div>
                                 )
                             }
@@ -88,7 +88,7 @@ const Home = () => {
                             {
                                 StatusData.map(sta =>
                                     <div className="col-6 text-center mb-2 pe-3">
-                                        <Button onClick={() => { anotherTest(sta) }}>{sta.status}</Button>
+                                        <button className='customButton' onClick={() => { anotherTest(sta) }}>{sta.status}</button>
                                     </div>
                                 )
                             }
